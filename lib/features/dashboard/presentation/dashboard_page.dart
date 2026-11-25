@@ -136,12 +136,7 @@ class _DashboardPageState extends State<DashboardPage> {
             forms: activeForms,
             stats: stats,
           );
-          final progress = SetupProgress.fromForms(
-            activeForms,
-            hasLogo: session.organization.hasLogo,
-          );
           final showWelcome = activeForms.isEmpty;
-          final isAdmin = session.profile.isAdmin;
 
           return ColoredBox(
             color: FelloColors.paper,
