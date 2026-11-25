@@ -104,12 +104,10 @@ class FirstTimeWelcome extends StatelessWidget {
   const FirstTimeWelcome({
     super.key,
     required this.onCreateForm,
-    required this.onExplore,
     required this.creating,
   });
 
   final VoidCallback onCreateForm;
-  final VoidCallback onExplore;
   final bool creating;
 
   @override
@@ -124,44 +122,28 @@ class FirstTimeWelcome extends StatelessWidget {
         border: Border.all(color: FelloColors.border),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             'Welcome to your workspace',
             style: theme.textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w700,
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            "Your workspace is ready. Start collecting customer feedback whenever you're ready.",
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: FelloColors.inkSoft,
-            ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              FilledButton(
-                onPressed: creating ? null : onCreateForm,
-                child: creating
-                    ? const SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Text('Create your first feedback form'),
-              ),
-              TextButton(
-                onPressed: creating ? null : onExplore,
-                child: const Text('Explore dashboard'),
-              ),
-            ],
+          FilledButton(
+            onPressed: creating ? null : onCreateForm,
+            child: creating
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                : const Text('Create your first feedback form'),
           ),
         ],
       ),

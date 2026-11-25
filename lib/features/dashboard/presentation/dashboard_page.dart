@@ -29,7 +29,6 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  bool _exploring = false;
   bool _creatingForm = false;
 
   @override
@@ -141,7 +140,7 @@ class _DashboardPageState extends State<DashboardPage> {
             activeForms,
             hasLogo: session.organization.hasLogo,
           );
-          final showWelcome = activeForms.isEmpty && !_exploring;
+          final showWelcome = activeForms.isEmpty;
           final isAdmin = session.profile.isAdmin;
 
           return ColoredBox(
@@ -153,28 +152,11 @@ class _DashboardPageState extends State<DashboardPage> {
                 slivers: [
                   if (showWelcome) ...[
                     SoftPadding(
-                      padding: const EdgeInsets.fromLTRB(28, 28, 28, 12),
+                      padding: const EdgeInsets.fromLTRB(28, 28, 28, 36),
                       child: FadeSlideIn(
                         child: FirstTimeWelcome(
                           creating: _creatingForm,
                           onCreateForm: _createFirstForm,
-                          onExplore: () => setState(() => _exploring = true),
-                        ),
-                      ),
-                    ),
-                    SoftPadding(
-                      padding: const EdgeInsets.fromLTRB(28, 0, 28, 36),
-                      child: FadeSlideIn(
-                        delay: const Duration(milliseconds: 60),
-                        child: SetupChecklistCard(
-                          progress: progress,
-                          onCreateForm: _creatingForm ? null : _createFirstForm,
-                          onInviteTeam: isAdmin
-                              ? () => context.go('/team')
-                              : null,
-                          onAddLogo: isAdmin
-                              ? () => context.go('/settings/logo')
-                              : null,
                         ),
                       ),
                     ),
@@ -192,25 +174,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         padding: const EdgeInsets.fromLTRB(28, 0, 28, 12),
                         child: _DashboardLoadErrorNotice(
                           message: state.errorMessage,
-                        ),
-                      ),
-                    if (progress.showChecklist)
-                      SoftPadding(
-                        padding: const EdgeInsets.fromLTRB(28, 0, 28, 12),
-                        child: FadeSlideIn(
-                          delay: const Duration(milliseconds: 30),
-                          child: SetupChecklistCard(
-                            progress: progress,
-                            onCreateForm: _creatingForm
-                                ? null
-                                : _createFirstForm,
-                            onInviteTeam: isAdmin
-                                ? () => context.go('/team')
-                                : null,
-                            onAddLogo: isAdmin
-                                ? () => context.go('/settings/logo')
-                                : null,
-                          ),
                         ),
                       ),
                     // Aggregate metrics only make sense while there is one
