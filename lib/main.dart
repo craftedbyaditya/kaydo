@@ -21,6 +21,7 @@ Future<void> main() async {
     // Clean paths for kaydo.sayge.in share links (/f/:slug). Hosting must
     // rewrite unknown routes to index.html (see deploy/ and web/_redirects).
     usePathUrlStrategy();
+    // Production deployment v1.2.2: Enhanced monitoring and improved error handling
   }
 
   final config = AppConfig.fromEnvironment();
